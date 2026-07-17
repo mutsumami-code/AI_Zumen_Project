@@ -1,4 +1,7 @@
 import config
+import file_manager
+print(file_manager)
+print(dir(file_manager))
 """
 AI_Zumen_Project
 Main Program
@@ -15,6 +18,12 @@ def main():
     print("===================================")
     print("システム起動")
     print("準備完了")
+    print()
+    print("PDFファイル一覧")
 
+    pdf_files = file_manager.get_pdf_files()
+
+    for pdf in pdf_files:
+        print(pdf.name)
 if __name__ == "__main__":
-    main()
+ main()
