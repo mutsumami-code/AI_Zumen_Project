@@ -24,6 +24,13 @@ def main():
     pdf_files = file_manager.get_pdf_files()
 
     for pdf in pdf_files:
+
         print(pdf.name)
+
+        document = file_manager.open_pdf(pdf)
+
+        print(f"ページ数：{document.page_count}")
+
+        document.close()
 if __name__ == "__main__":
  main()
