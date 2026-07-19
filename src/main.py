@@ -31,6 +31,12 @@ def main():
 
         print(f"ページ数：{document.page_count}")
 
+        output_image = f"output/{pdf.stem}.png"
+
+        file_manager.pdf_to_image(document, output_image)
+
+        print(f"画像保存：{output_image}")
+
         document.close()
 if __name__ == "__main__":
  main()
