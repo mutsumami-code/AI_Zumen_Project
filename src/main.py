@@ -1,7 +1,7 @@
+
 import config
 import file_manager
-print(file_manager)
-print(dir(file_manager))
+
 """
 AI_Zumen_Project
 Main Program
@@ -25,18 +25,23 @@ def main():
 
     for pdf in pdf_files:
 
-        print(pdf.name)
 
         document = file_manager.open_pdf(pdf)
 
-        print(f"ページ数：{document.page_count}")
+        width, height = file_manager.get_page_size(document)
 
         output_image = f"output/{pdf.stem}.png"
-
+        
         file_manager.pdf_to_image(document, output_image)
 
-        print(f"画像保存：{output_image}")
+        image_width, image_height = file_manager.get_image_size(output_image)
 
+        print(pdf.name)
+        print(f"ページ数：{document.page_count}")
+        print(f"ページサイズ：{width:.1f} × {height:.1f} pt")
+        print(f"画像サイズ：{image_width} × {image_height} pixel")
+        print(f"画像保存：{output_image}")
+        
         document.close()
 if __name__ == "__main__":
- main()
+    main()
