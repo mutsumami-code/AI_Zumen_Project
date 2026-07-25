@@ -59,3 +59,13 @@ def get_image_size(image_path):
     height, width = image.shape[:2]
 
     return width, height
+
+
+def open_image(image_path):
+    """
+    PNG画像をOpenCVで読み込む
+    """
+
+    image = cv2.imread(str(image_path))
+
+    return image    

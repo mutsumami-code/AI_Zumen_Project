@@ -1,6 +1,7 @@
 
 import config
 import file_manager
+import image_processor
 
 """
 AI_Zumen_Project
@@ -34,6 +35,20 @@ def main():
         
         file_manager.pdf_to_image(document, output_image)
 
+        image = file_manager.open_image(output_image)
+
+        gray_image = image_processor.convert_to_gray(image)
+
+        gray_output = f"output/{pdf.stem}_gray.png"
+
+        image_processor.save_image(gray_image, gray_output)
+
+        binary_image = image_processor.convert_to_binary(gray_image)
+
+        binary_output = f"output/{pdf.stem}_binary.png"
+
+        image_processor.save_image(binary_image, binary_output)
+
         image_width, image_height = file_manager.get_image_size(output_image)
 
         print(pdf.name)
@@ -41,6 +56,9 @@ def main():
         print(f"ページサイズ：{width:.1f} × {height:.1f} pt")
         print(f"画像サイズ：{image_width} × {image_height} pixel")
         print(f"画像保存：{output_image}")
+        print(f"画像配列サイズ：{image.shape}")
+        print(f"グレースケール保存：{gray_output}")
+        print(f"二値画像保存：{binary_output}")
         
         document.close()
 if __name__ == "__main__":
