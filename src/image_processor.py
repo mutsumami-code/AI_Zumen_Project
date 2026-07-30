@@ -31,4 +31,18 @@ def convert_to_binary(gray_image):
         cv2.THRESH_BINARY
     )
 
-    return binary       
+    return binary
+
+
+def detect_contours(binary_image):
+    """
+    二値画像から輪郭を取得する
+    """
+
+    contours, hierarchy = cv2.findContours(
+        binary_image,
+        cv2.RETR_LIST,
+        cv2.CHAIN_APPROX_SIMPLE
+    )
+
+    return contours
