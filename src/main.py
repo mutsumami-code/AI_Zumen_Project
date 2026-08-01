@@ -21,6 +21,7 @@ def main():
     print("準備完了")
     print()
     print("PDFファイル一覧")
+    
 
     pdf_files = file_manager.get_pdf_files()
 
@@ -49,6 +50,20 @@ def main():
 
         image_processor.save_image(binary_image, binary_output)
 
+        contours = image_processor.detect_contours(binary_image)
+
+        contour_image = image_processor.draw_contours(
+            image,
+            contours
+        )
+
+        contour_output = f"output/{pdf.stem}_contours.png"
+
+        image_processor.save_image(
+            contour_image,
+            contour_output
+        )
+
         image_width, image_height = file_manager.get_image_size(output_image)
 
         print(pdf.name)
@@ -59,6 +74,8 @@ def main():
         print(f"画像配列サイズ：{image.shape}")
         print(f"グレースケール保存：{gray_output}")
         print(f"二値画像保存：{binary_output}")
+        print(f"検出輪郭数：{len(contours)}")
+        print(f"輪郭画像保存：{contour_output}")
         
         document.close()
 if __name__ == "__main__":

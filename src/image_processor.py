@@ -46,3 +46,21 @@ def detect_contours(binary_image):
     )
 
     return contours
+
+
+def draw_contours(image, contours):
+    """
+    元画像へ輪郭を描画する
+    """
+
+    result = image.copy()
+
+    cv2.drawContours(
+        result,
+        contours,
+        -1,
+        (0, 0, 255),
+        2
+    )
+
+    return result

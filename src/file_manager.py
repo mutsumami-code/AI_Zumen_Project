@@ -2,6 +2,7 @@ from pathlib import Path
 import config
 import fitz
 import cv2
+import numpy as np
 
 
 def get_pdf_files():
@@ -52,20 +53,30 @@ def get_page_size(document):
 def get_image_size(image_path):
     """
     PNG画像のサイズを取得する
+    日本語ファイル名対応
     """
 
-    image = cv2.imread(str(image_path))
+    image = cv2.imdecode(
+        np.fromfile(image_path, dtype=np.uint8),
+        cv2.IMREAD_COLOR
+    )
 
     height, width = image.shape[:2]
 
     return width, height
 
 
+
+
 def open_image(image_path):
     """
     PNG画像をOpenCVで読み込む
+    日本語ファイル名対応
     """
 
-    image = cv2.imread(str(image_path))
+    image = cv2.imdecode(
+        np.fromfile(image_path, dtype=np.uint8),
+        cv2.IMREAD_COLOR
+    )
 
-    return image    
+    return image
