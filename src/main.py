@@ -2,6 +2,7 @@
 import config
 import file_manager
 import image_processor
+import contour_processor
 
 """
 AI_Zumen_Project
@@ -51,6 +52,14 @@ def main():
         image_processor.save_image(binary_image, binary_output)
 
         contours = image_processor.detect_contours(binary_image)
+
+        for i, contour in enumerate(contours[:10], start=1):
+
+            area = contour_processor.get_contour_area(contour)
+
+            print(f"輪郭{i}: 面積 = {area:.2f}")
+
+    
 
         contour_image = image_processor.draw_contours(
             image,
